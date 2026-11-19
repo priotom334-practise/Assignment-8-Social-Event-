@@ -8,28 +8,28 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className="relative flex flex-1 items-center justify-center overflow-hidden bg-[#f5faf5] px-6 py-24">
+    <main className="relative flex flex-1 items-center justify-center overflow-hidden bg-[#f5faf5] px-6 py-24 transition-colors dark:bg-slate-950">
       <div
         aria-hidden="true"
-        className="absolute -left-24 top-0 size-72 rounded-full bg-emerald-200/50 blur-3xl"
+        className="absolute -left-24 top-0 size-72 rounded-full bg-emerald-200/50 blur-3xl dark:bg-emerald-900/30"
       />
       <div
         aria-hidden="true"
-        className="absolute -right-24 bottom-0 size-80 rounded-full bg-lime-200/40 blur-3xl"
+        className="absolute -right-24 bottom-0 size-80 rounded-full bg-lime-200/40 blur-3xl dark:bg-emerald-800/25"
       />
 
       <div className="relative mx-auto max-w-xl text-center">
-        <p className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white/80 px-4 py-2 text-sm font-semibold text-emerald-800 shadow-sm">
+        <p className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white/80 px-4 py-2 text-sm font-semibold text-emerald-800 shadow-sm dark:border-slate-700 dark:bg-slate-900/80 dark:text-emerald-300">
           <span className="size-2 rounded-full bg-emerald-500" />
           Looks like you took a wrong turn
         </p>
-        <p className="mt-8 text-7xl font-semibold tracking-tight text-emerald-700 sm:text-8xl">
+        <p className="mt-8 text-7xl font-semibold tracking-tight text-emerald-700 dark:text-emerald-300 sm:text-8xl">
           404
         </p>
-        <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
+        <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white sm:text-4xl">
           We can’t find that page.
         </h1>
-        <p className="mx-auto mt-4 max-w-md text-base leading-7 text-slate-600">
+        <p className="mx-auto mt-4 max-w-md text-base leading-7 text-slate-600 dark:text-slate-300">
           The page may have moved, or the link might be out of date. Let’s get
           you back to CommunityCare.
         </p>

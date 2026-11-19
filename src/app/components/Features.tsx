@@ -47,20 +47,20 @@ export default function Features() {
   return (
     <section
       aria-labelledby="features-heading"
-      className="bg-white px-6 py-16 sm:px-8 sm:py-20 lg:px-8"
+      className="bg-white px-6 py-16 transition-colors dark:bg-slate-950 sm:px-8 sm:py-20 lg:px-8"
     >
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-700 sm:text-sm">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-300 sm:text-sm">
             Find your way to make a difference
           </p>
           <h2
             id="features-heading"
-            className="mt-3 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl"
+            className="mt-3 text-3xl font-bold tracking-tight text-slate-950 dark:text-white sm:text-4xl"
           >
             Our Features
           </h2>
-          <p className="mt-4 text-base leading-7 text-slate-600">
+          <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-300">
             Everything you need to connect with your neighbors and care for
             your community.
           </p>
@@ -70,9 +70,9 @@ export default function Features() {
           {features.map((feature) => (
             <article
               key={feature.title}
-              className="group rounded-2xl border border-emerald-100 bg-[#f8fbf8] p-6 text-center shadow-sm transition duration-200 hover:-translate-y-1 hover:border-emerald-200 hover:bg-white hover:shadow-lg hover:shadow-emerald-950/5"
+              className="group rounded-2xl border border-emerald-100 bg-[#f8fbf8] p-6 text-center shadow-sm transition duration-200 hover:-translate-y-1 hover:border-emerald-200 hover:bg-white hover:shadow-lg hover:shadow-emerald-950/5 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-emerald-800 dark:hover:bg-slate-800"
             >
-              <span className="mx-auto grid size-12 place-items-center rounded-2xl bg-emerald-100 text-emerald-800 transition-colors group-hover:bg-emerald-700 group-hover:text-white">
+              <span className="mx-auto grid size-12 place-items-center rounded-2xl bg-emerald-100 text-emerald-800 transition-colors group-hover:bg-emerald-700 group-hover:text-white dark:bg-emerald-950 dark:text-emerald-300">
                 <svg
                   aria-hidden="true"
                   viewBox="0 0 24 24"
@@ -86,10 +86,10 @@ export default function Features() {
                   {feature.icon}
                 </svg>
               </span>
-              <h3 className="mt-5 text-base font-semibold text-slate-900">
+              <h3 className="mt-5 text-base font-semibold text-slate-900 dark:text-slate-100">
                 {feature.title}
               </h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
+              <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
                 {feature.description}
               </p>
             </article>
