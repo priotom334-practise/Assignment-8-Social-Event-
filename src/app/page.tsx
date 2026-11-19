@@ -1,8 +1,11 @@
+import Banner from "./components/Banner";
+import Features from "./components/Features";
 
 export default function Home() {
   return (
-    <div>
-              <p><h1>Hello events</h1></p>
-    </div>
+    <main>
+      <Banner />
+      <Features />
+    </main>
   );
 }
