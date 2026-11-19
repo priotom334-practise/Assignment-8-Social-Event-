@@ -34,6 +34,7 @@ function LoginFieldIcon({ name }: { name: "email" | "lock" }) {
 
 export default function LoginPage() {
   const router = useRouter();
+  const { refetch: refreshSession } = authClient.useSession();
   const [pendingAction, setPendingAction] = useState<"email" | "google" | null>(
     null,
   );
@@ -57,6 +58,7 @@ export default function LoginPage() {
         return;
       }
 
+      await refreshSession();
       router.replace("/");
       router.refresh();
     } catch (error) {

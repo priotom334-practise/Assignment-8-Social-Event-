@@ -15,7 +15,7 @@ function requiredEnv(name: string) {
 
 const mongoUri = requiredEnv("MONGODB_URI");
 const baseURL = requiredEnv("BETTER_AUTH_URL");
-const trustedOrigin = new URL(baseURL).origin;
+export const authOrigin = new URL(baseURL).origin;
 const passwordPattern =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9\s])(?!.*\s).{6,}$/;
 
@@ -23,7 +23,7 @@ const globalForMongo = globalThis as typeof globalThis & {
   communityCareMongoClient?: MongoClient;
 };
 
-const mongoClient =
+export const mongoClient =
   globalForMongo.communityCareMongoClient ?? new MongoClient(mongoUri);
 
 if (process.env.NODE_ENV !== "production") {
@@ -34,7 +34,7 @@ export const auth = betterAuth({
   appName: "CommunityCare",
   baseURL,
   secret: requiredEnv("BETTER_AUTH_SECRET"),
-  trustedOrigins: [trustedOrigin],
+  trustedOrigins: [authOrigin],
   database: mongodbAdapter(mongoClient.db()),
   emailAndPassword: {
     enabled: true,

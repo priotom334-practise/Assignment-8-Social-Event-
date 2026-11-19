@@ -31,6 +31,8 @@ Authentication uses Better Auth with MongoDB for email/password accounts and Goo
 
 Add `${BETTER_AUTH_URL}/api/auth/callback/google` as an authorized redirect URI in the Google OAuth client. Keep all secret values out of source control.
 
+Profile photos are stored in the same MongoDB database using GridFS. Uploads accept JPG, PNG, and WebP files up to 5 MB.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
