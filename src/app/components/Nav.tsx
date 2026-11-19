@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import AuthNavActions from "./AuthNavActions";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Nav() {
@@ -33,18 +34,7 @@ export default function Nav() {
 
         <div className="flex items-center justify-self-end gap-1.5 sm:gap-3">
           <ThemeToggle/>
-          <Link
-            href="/login"
-            className="hidden whitespace-nowrap rounded-full px-2 py-2 text-xs font-semibold text-slate-700 transition-colors hover:text-emerald-700 dark:text-white/85 dark:hover:text-white sm:inline-flex sm:px-3 sm:text-sm"
-          >
-            Log in
-          </Link>
-          <Link
-            href="/signup"
-            className="whitespace-nowrap rounded-full bg-emerald-500 px-2 py-2 text-[10px] font-semibold text-white shadow-sm transition-colors hover:bg-emerald-400 sm:px-5 sm:text-sm"
-          >
-            Sign up
-          </Link>
+          <AuthNavActions />
         </div>
       </nav>
     </header>

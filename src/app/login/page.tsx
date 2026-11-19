@@ -1,6 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { type FormEvent, useState } from "react";
+import { authClient } from "@/lib/auth-client";
 
 function LoginFieldIcon({ name }: { name: "email" | "lock" }) {
   return (
@@ -30,6 +33,69 @@ function LoginFieldIcon({ name }: { name: "email" | "lock" }) {
 }
 
 export default function LoginPage() {
+  const router = useRouter();
+  const [pendingAction, setPendingAction] = useState<"email" | "google" | null>(
+    null,
+  );
+  const [errorMessage, setErrorMessage] = useState("");
+
+  async function handleLogin(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setErrorMessage("");
+    setPendingAction("email");
+
+    const formData = new FormData(event.currentTarget);
+    try {
+      const { error } = await authClient.signIn.email({
+        email: String(formData.get("email") ?? ""),
+        password: String(formData.get("password") ?? ""),
+        callbackURL: "/",
+      });
+
+      if (error) {
+        setErrorMessage(error.message ?? "Unable to log in. Please try again.");
+        return;
+      }
+
+      router.replace("/");
+      router.refresh();
+    } catch (error) {
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Unable to log in. Please try again.",
+      );
+    } finally {
+      setPendingAction(null);
+    }
+  }
+
+  async function handleGoogleLogin() {
+    setErrorMessage("");
+    setPendingAction("google");
+
+    try {
+      const { error } = await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/",
+      });
+
+      if (error) {
+        setErrorMessage(
+          error.message ?? "Unable to continue with Google. Please try again.",
+        );
+      }
+    } catch (error) {
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Unable to continue with Google. Please try again.",
+      );
+    } finally {
+      setPendingAction(null);
+    }
+  }
+
   return (
     <main className="relative flex min-h-[calc(100svh-5rem)] items-center justify-center overflow-hidden bg-gradient-to-br from-[#edf7f0] via-[#f8fbf8] to-[#e7f4eb] px-4 py-12 transition-colors dark:from-slate-950 dark:via-slate-900 dark:to-emerald-950 sm:px-6">
       <div
@@ -76,7 +142,7 @@ export default function LoginPage() {
         <form
           aria-labelledby="login-heading"
           className="mt-6 space-y-3"
-          onSubmit={(event) => event.preventDefault()}
+          onSubmit={handleLogin}
         >
           <div>
             <label className="sr-only" htmlFor="login-email">
@@ -119,11 +185,21 @@ export default function LoginPage() {
           </div>
           <button
             type="submit"
+            disabled={pendingAction !== null}
             className="mt-1 inline-flex h-12 w-full items-center justify-center rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-700 text-sm font-bold text-white shadow-md shadow-emerald-800/20 transition hover:-translate-y-0.5 hover:from-emerald-700 hover:to-emerald-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
           >
-            Login
+            {pendingAction === "email" ? "Logging in..." : "Login"}
           </button>
         </form>
+
+        {errorMessage && (
+          <p
+            role="alert"
+            className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-950/40 dark:text-red-300"
+          >
+            {errorMessage}
+          </p>
+        )}
 
         <div className="my-4 flex items-center gap-3 text-xs text-slate-400">
           <span className="h-px flex-1 bg-slate-200 dark:bg-slate-700" />
@@ -132,6 +208,8 @@ export default function LoginPage() {
         </div>
         <button
           type="button"
+          onClick={handleGoogleLogin}
+          disabled={pendingAction !== null}
           className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:border-slate-600 dark:hover:bg-slate-700"
         >
           <span
@@ -140,7 +218,9 @@ export default function LoginPage() {
           >
             G
           </span>
-          Continue with Google
+          {pendingAction === "google"
+            ? "Connecting to Google..."
+            : "Continue with Google"}
         </button>
 
         <p className="mt-6 text-center text-sm text-slate-500 dark:text-slate-400">
