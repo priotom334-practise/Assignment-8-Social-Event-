@@ -33,6 +33,12 @@ Add `${BETTER_AUTH_URL}/api/auth/callback/google` as an authorized redirect URI 
 
 Profile photos are stored in the same MongoDB database using GridFS. Uploads accept JPG, PNG, and WebP files up to 5 MB.
 
+## Events
+
+Signed-in users can create community events with a future date and time. Event records are stored in the MongoDB `events` collection, including the creator's email and user ID. Upcoming events are listed on the Upcoming Events page.
+
+Event thumbnails can be uploaded as JPG, PNG, or WebP files up to 5 MB, or supplied as an image URL. Uploaded thumbnails are stored in MongoDB GridFS.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

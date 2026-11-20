@@ -35,11 +35,11 @@ export default function AuthNavActions() {
   }
 
   return (
-    <div className="relative flex items-center gap-1.5 sm:gap-3">
+    <div className="relative flex h-full items-center gap-1.5 sm:gap-3">
       {session ? (
         <>
           <div
-            className="group relative"
+            className="group relative flex items-center"
             onMouseEnter={() => setIsMenuOpen(true)}
             onMouseLeave={() => setIsMenuOpen(false)}
             onFocusCapture={() => setIsMenuOpen(true)}
@@ -64,7 +64,7 @@ export default function AuthNavActions() {
               aria-expanded={isMenuOpen}
               aria-controls="account-menu"
               onClick={() => setIsMenuOpen((open) => !open)}
-              className="rounded-full bg-gradient-to-br from-emerald-400 via-lime-400 to-emerald-700 p-0.5 shadow-md shadow-emerald-900/20 transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600"
+              className="inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 via-lime-400 to-emerald-700 p-0.5 leading-none shadow-md shadow-emerald-900/20 transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600 sm:size-11"
             >
               <Image
                 src={session.user.image || "/user.jpg"}
@@ -72,7 +72,7 @@ export default function AuthNavActions() {
                 width={40}
                 height={40}
                 unoptimized
-                className="size-9 rounded-full border-2 border-white object-cover sm:size-10"
+                className="block size-9 rounded-full border-2 border-white object-cover sm:size-10"
               />
             </button>
             <nav
@@ -196,7 +196,7 @@ export default function AuthNavActions() {
             type="button"
             onClick={handleSignOut}
             disabled={isSigningOut}
-            className="whitespace-nowrap rounded-full px-2 py-2 text-[10px] font-semibold text-slate-700 transition-colors hover:text-emerald-700 disabled:opacity-60 dark:text-white/85 dark:hover:text-white sm:px-3 sm:text-sm"
+            className="inline-flex items-center justify-center whitespace-nowrap rounded-full px-2 py-2 text-[10px] font-semibold leading-none text-slate-700 transition-colors hover:text-emerald-700 disabled:opacity-60 dark:text-white/85 dark:hover:text-white sm:px-3 sm:text-sm"
           >
             {isSigningOut ? "Signing out..." : "Sign out"}
           </button>
